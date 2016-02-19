@@ -8,6 +8,5 @@ Repository Structure
 ```
 examples/           Vulkan examples
 help/                   Help
-license/                License
 src/                     Vulkan headers
 ```
