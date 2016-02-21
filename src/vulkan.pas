@@ -60,23 +60,23 @@ uses  vk_platform
 ;
 
 {$IFDEF VK_USE_PLATFORM_ANDROID_KHR}
-  //VulkanLibName = '';
+  VulkanLibName = 'libvulkan.so';
 {$ENDIF}
 {$IFDEF VK_USE_PLATFORM_MIR_KHR}
   //VulkanLibName = '';
 {$ENDIF}
 {$IFDEF VK_USE_PLATFORM_WAYLAND_KHR}
-  //VulkanLibName = '';
+  VulkanLibName = 'libvulkan.so.1';
 {$ENDIF}
 {$IFDEF VK_USE_PLATFORM_WIN32_KHR}
 const
   VulkanLibName = 'vulkan-1-1-0-2-0.dll';
 {$ENDIF}
 {$IFDEF VK_USE_PLATFORM_XLIB_KHR}
-  //VulkanLibName = '';
+  VulkanLibName = 'libvulkan.so';
 {$ENDIF}
 {$IFDEF VK_USE_PLATFORM_XCB_KHR}
-  //VulkanLibName = '';
+  VulkanLibName = 'libvulkan.so';
 {$ENDIF}
 
 function VK_MAKE_VERSION(const major, minor, patch: Integer): Integer;
@@ -4422,6 +4422,7 @@ begin
   // load CL functions
   if (Vulkan_LibHandle <> nil) then
   begin
+    //I think need rewrite https://www.khronos.org/registry/vulkan/specs/1.0/man/html/vkGetInstanceProcAddr.html
     vkCreateInstance := TvkCreateInstance(vulkanGetProcAddress('vkCreateInstance', Vulkan_LibHandle));
     vkDestroyInstance := TvkDestroyInstance(vulkanGetProcAddress('vkDestroyInstance', Vulkan_LibHandle));
     vkEnumeratePhysicalDevices := TvkEnumeratePhysicalDevices(vulkanGetProcAddress('vkEnumeratePhysicalDevices', Vulkan_LibHandle));
